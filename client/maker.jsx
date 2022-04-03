@@ -88,3 +88,5 @@ const init = async () => {
 
     loadDomosFromServer();
 }
+
+window.onload = init;
