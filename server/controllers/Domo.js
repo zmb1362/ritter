@@ -3,9 +3,7 @@ const DomoModel = require('../models/Domo');
 
 const { Domo } = models;
 
-const makerPage = (req, res) => {
-  return res.render('app');
-};
+const makerPage = (req, res) => res.render('app');
 
 const makeDomo = async (req, res) => {
   if (!req.body.name || !req.body.age || !req.body.level) {
@@ -32,27 +30,24 @@ const makeDomo = async (req, res) => {
   }
 };
 
-const getDomos = (req, res) => {
-  return DomoModel.findByOwner(req.session.account._id, (err, docs) => {
-    if(err) {
-      console.log(err);
-      return res.status(400).json({ error: "An error occurred!" });
-    }
+const getDomos = (req, res) => DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+  if (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred!' });
+  }
 
-    return res.json({ domos: docs });
-  });
-}
+  return res.json({ domos: docs });
+});
 
-const deleteDomo = (req, res) => {
-  return DomoModel.findByOwner(req.session.account._id, req.body.name, (err, docs) => {
-    if(err) {
-      console.log(err);
-      return res.status(400).json({ error: "An error occurred!" });
-    }
+const deleteDomo = (req, res) => DomoModel.deleteDomo(req.session.account._id, 
+  req.body.name, (err, docs) => {
+  if (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred!' });
+  }
 
-    return res.json({ domos: docs });
-  });
-}
+  return res.json({ domos: docs });
+});
 
 module.exports = {
   makerPage,

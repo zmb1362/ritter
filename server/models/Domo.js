@@ -54,7 +54,7 @@ DomoSchema.statics.deleteDomo = (ownerId, name, callback) => {
     owner: mongoose.Types.ObjectId(ownerId),
   };
 
-  return DomoModel.find(search).update( { $pull: { "name": name } }).lean().exec(callback);
+  return DomoModel.find(search).update({ $pull: { name } }).lean().exec(callback);
 };
 
 DomoModel = mongoose.model('Domo', DomoSchema);
