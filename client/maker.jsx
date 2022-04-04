@@ -19,20 +19,6 @@ const handleDomo = (e) => {
     return false;
 }
 
-const deleteDomo = (e) => {
-    e.preventDefault();
-    helper.hideError();
-
-    const name = e.target.querySelector('#domoName').value;
-    const age = e.target.querySelector('#domoAge').value;
-    const level = e.target.querySelector('#domoLevel').value;
-    const _csrf = e.target.querySelector('#_csrf').value;
-
-    helper.sendDelete(e.target.action, {name, age, level, _csrf}, loadDomosFromServer);
-
-    return false;
-}
-
 const DomoForm = (props) => {
     return (
         <form id="domoForm"
@@ -65,21 +51,12 @@ const DomoList = (props) => {
 
     const domoNodes = props.domos.map(domo => {
         return (
-            <form id="domo"
-                name="domo"
-                onSubmit={deleteDomo}
-                action="/deleteDomo"
-                method="DELETE"
-                className="domo"
-            >
-                <div key={domo.id} className="domo">
-                    <img src="/assets/img/domoface.jpeg" alt="domo face" className='domoFace' />
-                    <h3 className='domoName'> Name: {domo.name} </h3>
-                    <h3 className='domoAge'> Age: {domo.age} </h3>
-                    <h3 className='domoLevel'> Level: {domo.level} </h3>
-                    <input className="domoDelete" type="submit" value="Delete Domo" />
-                </div>
-            </form>
+            <div key={domo.id} className="domo">
+                <img src="/assets/img/domoface.jpeg" alt="domo face" className='domoFace' />
+                <h3 className='domoName'> Name: {domo.name} </h3>
+                <h3 className='domoAge'> Age: {domo.age} </h3>
+                <h3 className='domoLevel'> Level: {domo.level} </h3>
+            </div>
         );
     });
 
