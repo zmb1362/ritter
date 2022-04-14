@@ -4,7 +4,7 @@
 */
 const handleError = (message) => {
     document.getElementById('errorMessage').textContent = message;
-    document.getElementById('domoMessage').classList.remove('hidden');
+    document.getElementById('ritzMessage').classList.remove('hidden');
 };
   
 /* Sends post requests to the server using fetch. Will look for various
@@ -20,7 +20,7 @@ const sendPost = async (url, data, handler) => {
     });
 
     const result = await response.json();
-    document.getElementById('domoMessage').classList.add('hidden');
+    document.getElementById('ritzMessage').classList.add('hidden');
 
     if(result.error) {
         handleError(result.error);
@@ -37,7 +37,7 @@ const sendPost = async (url, data, handler) => {
 };
 
 const hideError = () => {
-    document.getElementById('domoMessage').classList.add('hidden');
+    document.getElementById('ritzMessage').classList.add('hidden');
 };
 
 module.exports = {

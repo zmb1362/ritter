@@ -1,78 +1,69 @@
 const helper = require('./helper.js');
 
-const handleDomo = (e) => {
+const handleRitz = (e) => {
     e.preventDefault();
     helper.hideError();
 
-    const name = e.target.querySelector('#domoName').value;
-    const age = e.target.querySelector('#domoAge').value;
-    const level = e.target.querySelector('#domoLevel').value;
+    const text = e.target.querySelector('#ritzText').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
-    if(!name || !age | !level) {
-        helper.handleError('All fields are required!');
+    if(!text) {
+        helper.handleError('Text is required!');
         return false;
     }
 
-    helper.sendPost(e.target.action, {name, age, level, _csrf}, loadDomosFromServer);
+    helper.sendPost(e.target.action, {name, age, level, _csrf}, loadRitzsFromServer);
 
     return false;
 }
 
-const DomoForm = (props) => {
+const RitzForm = (props) => {
     return (
-        <form id="domoForm"
-            name="domoForm"
-            onSubmit={handleDomo}
+        <form id="ritzForm"
+            name="ritzForm"
+            onSubmit={handleRitz}
             action="/maker"
             method="POST"
-            className="domoForm"
+            className="ritzForm"
         >
-            <label htmlFor="name">Name: </label>
-            <input id="domoName" type="text" name="name" placeholder="Domo Name" />
-            <label htmlFor="age">Age: </label>
-            <input id="domoAge" type="number" min="0" name="age" />
-            <label htmlFor="level">Level: </label>
-            <input id="domoLevel" type="number" min="0" name="level" />
+            <label htmlFor="name">Text: </label>
+            <input id="ritzText" type="text" name="name" placeholder="Ritz Message" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
-            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+            <input className="makeRitzSubmit" type="submit" value="Make a Ritz" />
         </form>
     );
 }
 
-const DomoList = (props) => {
-    if(props.domos.length === 0) {
+const RitzList = (props) => {
+    if(props.ritz.length === 0) {
         return (
-            <div className='domoList'>
-                <h3 className='emptyDomo'>No Domos Yet!</h3>
+            <div className='ritzList'>
+                <h3 className='emptyRitz'>No Ritzs Yet!</h3>
             </div>
         );
     }
 
-    const domoNodes = props.domos.map(domo => {
+    const ritzNodes = props.ritz.map(ritz => {
         return (
-            <div key={domo.id} className="domo">
-                <img src="/assets/img/domoface.jpeg" alt="domo face" className='domoFace' />
-                <h3 className='domoName'> Name: {domo.name} </h3>
-                <h3 className='domoAge'> Age: {domo.age} </h3>
-                <h3 className='domoLevel'> Level: {domo.level} </h3>
+            <div key={ritz.id} className="ritz">
+                <h3 className='ritzText'> Text: {ritz.text} </h3>
             </div>
         );
     });
 
     return (
-        <div className='domoList'>
-            {domoNodes}
+        <div className='ritzList'>
+            {ritzNodes}
         </div>
     );
 };
 
-const loadDomosFromServer = async () => {
-    const response = await fetch ('/getDomos');
+const loadRitzsFromServer = async () => {
+    const response = await fetch ('/getRitzs');
     const data = await response.json();
     ReactDOM.render(
-        <DomoList domos={data.domos} />,
-        document.getElementById('domos')
+        <RitzList ritzs={data.ritzs} />,
+        document.getElementById('ritzs')
     );
 }
 
@@ -81,16 +72,16 @@ const init = async () => {
     const data = await response.json();
 
     ReactDOM.render(
-        <DomoForm csrf={data.csrfToken} />,
-        document.getElementById('makeDomo')
+        <RitzForm csrf={data.csrfToken} />,
+        document.getElementById('makeRitz')
     );
 
     ReactDOM.render(
-        <DomoList domos={[]} />,
-        document.getElementById('domos')
+        <RitzList ritzs={[]} />,
+        document.getElementById('ritzs')
     );
 
-    loadDomosFromServer();
+    loadRitzsFromServer();
 }
 
 window.onload = init;
