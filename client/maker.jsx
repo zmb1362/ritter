@@ -35,7 +35,7 @@ const RitzForm = (props) => {
 }
 
 const RitzList = (props) => {
-    if(props.ritz.length === 0) {
+    if(props.ritzs.length === 0) {
         return (
             <div className='ritzList'>
                 <h3 className='emptyRitz'>No Ritzs Yet!</h3>
@@ -43,7 +43,7 @@ const RitzList = (props) => {
         );
     }
 
-    const ritzNodes = props.ritz.map(ritz => {
+    const ritzNodes = props.ritzs.map(ritz => {
         return (
             <div key={ritz.id} className="ritz">
                 <h3 className='ritzText'> Text: {ritz.text} </h3>
