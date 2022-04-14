@@ -12,7 +12,7 @@ const handleRitz = (e) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, {name, age, level, _csrf}, loadRitzsFromServer);
+    helper.sendPost(e.target.action, {text, _csrf}, loadRitzsFromServer);
 
     return false;
 }
