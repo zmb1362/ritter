@@ -26,10 +26,10 @@ const RitzForm = (props) => {
             method="POST"
             className="ritzForm"
         >
-            <label htmlFor="name">Text: </label>
+            <label htmlFor="name">Ritz: </label>
             <input id="ritzText" type="text" name="name" placeholder="Ritz Message" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
-            <input className="makeRitzSubmit" type="submit" value="Make a Ritz" />
+            <input className="makeRitzSubmit" type="submit" value="Send Ritz" />
         </form>
     );
 }
@@ -46,7 +46,7 @@ const RitzList = (props) => {
     const ritzNodes = props.ritzs.map(ritz => {
         return (
             <div key={ritz.id} className="ritz">
-                <h3 className='ritzText'> Text: {ritz.text} </h3>
+                <h3 className='ritzText'> "Username": {ritz.text} </h3>
             </div>
         );
     });

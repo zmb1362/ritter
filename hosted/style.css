@@ -6,18 +6,12 @@ html, body {
     overflow-x: hidden;
 }
 
-#logo {
-    height: 40px;
-    width: 40;
-    padding-top: 5px;
-    float:left;
-    border-radius: 8px;
-}
-
 nav {
-    width: 100%;
-    height: 50px;
-    background-color: #55acee;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
 }
 
 nav:nth-child(1) {
@@ -25,69 +19,21 @@ nav:nth-child(1) {
 }
 
 .navlink {
-    padding: 5px;
-    padding-top: 12px;
-    padding-left: 20px;
-    color: white;
-    font-size: 1.3em;
     float: left;
 }
 
 .navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
+    display: block;
     color: white;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 14px 16px;
     text-decoration: none;
-    padding: 5px;
-    border-radius: 4px;
-    background-color: #55acee;
-    transition: background-color 0.4s ease;
 }
 
 .navlink a:hover {
-    transition: background-color 0.8s ease;
-    background-color: #66bdff;
-}
-
-.domoForm {
-    border: 2px solid #338acc;
-    height: 35px;
-    width: 700px;
-    margin-top:0px;
-    padding-top:10px;
-    background-color: #55acee;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-}
-
-.domoForm label {
-    display: inline-block;
-    width: 75px;
-    margin-left: 10px;
-    font-size: 1.2em;
-    float: left;
-    color: white;
-}
-
-.domoForm input[type=text] {
-    float:left;
-}
-
-.makeDomoSubmit {
-    transition: background-color 0.4s ease;
-    display: inline;
-    width: 90px;
-    background-color: #55acee;
-    border-radius: 2px;
-    color: white;
-    text-decoration: none;
-}
-
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
-    color: white;
-}
-
-.makeDomoSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
+    color: #333;
+    background-color: rgb(255, 187, 123);
 }
 
 .mainForm {
@@ -110,17 +56,33 @@ nav:nth-child(1) {
     font-size: 1.2em;
 }
 
+.makeRitzSubmit {
+    display: block;
+    text-align: center;
+    width: 120px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+}
+
+.makeRitzSubmit:link, .makeRitzSubmit:visited, .makeRitzSubmit:hover, .makeRitzSubmit:active {
+    color: white;
+}
+
+.makeRitzSubmit:hover {
+    color: #333;
+    background-color: rgb(255, 187, 123);
+    cursor: pointer;
+}
+
 .formSubmit {
-    transition: background-color 0.4s ease;
     display: block;
     text-align: center;
     margin: 0 auto;
     margin-top: 14px;
     font-size: 1.2em;
     width: 100px;
-    background-color: #55acee;
-    border-radius: 2px;
-    border-color: #66acee;
+    background-color: #333;
     padding: 3px 0px;
     color: white;
     text-decoration: none;
@@ -131,8 +93,9 @@ nav:nth-child(1) {
 }
 
 .formSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
+    color: #333;
+    background-color: rgb(255, 187, 123);
+    cursor: pointer;
 }
 
 #user, #pass, #pass2 {
@@ -144,14 +107,38 @@ nav:nth-child(1) {
 
 #user:focus, #pass:focus, #pass2:focus {
     outline: none;
-    box-shadow: 0px 0px 1px 1px #55acee;
+    box-shadow: 0px 0px 1px 1px rgb(255, 187, 123);
 }
 
 .hidden {
     display: none;
 }
 
-#domoMessage {
+.ritzForm {
+    border: 2px solid black;
+    height: 35px;
+    width: 700px;
+    margin-top:0px;
+    padding-top:10px;
+    background-color: rgb(255, 187, 123);
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.ritzForm label {
+    display: inline-block;
+    width: 75px;
+    margin-left: 10px;
+    font-size: 1.2em;
+    float: left;
+    color: white;
+}
+
+.ritzForm input[type=text] {
+    float:left;
+}
+
+#ritzMessage {
     top: 250px;
     width: 250px;
     height: 650px;
@@ -161,7 +148,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-#domoMessage h3 {
+#ritzMessage h3 {
     width: 200px;
     position: absolute;
     top: 0px;
@@ -181,57 +168,36 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
-#domo {
+#ritzs {
     z-index: 225;
     margin-top: -20px;
     margin-left: 135px;
     height: 450px;
     width: 300px;
-    -ms-transform: rotate(330deg);
-    -webkit-transform: rotate(330deg); 
-    transform: rotate(330deg);
 }
 
-#domos {
+#ritzs {
     width: 40%;
     min-width: 400px;
-    border: 2px solid #55acee;
+    border: 2px solid #333;
     border-radius: 4px;
     margin: 0 auto;
     margin-top: 100px;
 }
 
-.domo {
+.ritz {
     width: 95%;
     margin: 0 auto;
     margin-top: 2px;
     margin-bottom: 2px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
-    background-color: #55acee;
+    background-color: rgb(255, 187, 123);
     padding: 10px;
     min-height:60px;
     overflow: hidden;
+    cursor: normal;
 }
 
-.domo:hover {
-    transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
-}
-
-img.domoFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
-    float:left;
-}
-
-h3.emptyDomo {
+h3.emptyRitz {
     width: 400px;
     font-size: 1.5em;
     margin: 0 auto;
@@ -239,7 +205,7 @@ h3.emptyDomo {
     margin-top: 18px;
 }
 
-h3.domoName {
+h3.ritzText {
     float:left;
     width: 200px;
     font-weight: bold;
@@ -247,19 +213,10 @@ h3.domoName {
     font-size: 1.5em;
 }
 
-h3.domoAge {
-    float:right;
-    text-align: left;
-    width: 100px;
-    font-weight: bold;
-    padding-right: 40px;
-    font-size: 1.5em;
-}
-
-.domo:first-child {
+.ritz:first-child {
     margin-top: 10px;
 }
 
-.domo:last-child {
+.ritz:last-child {
     margin-bottom:10px;
 }
