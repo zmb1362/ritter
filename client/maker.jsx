@@ -12,7 +12,7 @@ const handleRitz = (e) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, {text, _csrf}, loadRitzsFromServer);
+    helper.sendPost(e.target.action, {text, _csrf}, loadAllRitzsFromServer);
 
     return false;
 }
@@ -34,7 +34,7 @@ const RitzForm = (props) => {
     );
 }
 
-const RitzList = (props) => {
+const AllRitzList = (props) => {
     if(props.ritzs.length === 0) {
         return (
             <div className='ritzList'>
@@ -46,7 +46,31 @@ const RitzList = (props) => {
     const ritzNodes = props.ritzs.map(ritz => {
         return (
             <div key={ritz.id} className="ritz">
-                <h3 className='ritzText'> "Username": {ritz.text} </h3>
+                <h3 className='ritzText'> {ritz.username}: {ritz.text} </h3>
+            </div>
+        );
+    });
+
+    return (
+        <div className='ritzList'>
+            {ritzNodes}
+        </div>
+    );
+};
+
+const MyRitzList = (props) => {
+    if(props.ritzs.length === 0) {
+        return (
+            <div className='ritzList'>
+                <h3 className='emptyRitz'>No Ritzs Yet!</h3>
+            </div>
+        );
+    }
+
+    const ritzNodes = props.ritzs.map(ritz => {
+        return (
+            <div key={ritz.id} className="ritz">
+                <h3 className='ritzText'> {ritz.username}: {ritz.text} </h3>
             </div>
         );
     });
@@ -62,10 +86,20 @@ const loadRitzsFromServer = async () => {
     const response = await fetch ('/getRitzs');
     const data = await response.json();
     ReactDOM.render(
-        <RitzList ritzs={data.ritzs} />,
+        <MyRitzList ritzs={data.ritzs} />,
         document.getElementById('ritzs')
     );
 }
+
+const loadAllRitzsFromServer = async () => {
+    const response = await fetch ('/getAll');
+    const data = await response.json();
+    ReactDOM.render(
+        <AllRitzList ritzs={data.ritzs} />,
+        document.getElementById('ritzs')
+    );
+}
+
 
 const init = async () => {
     const response = await fetch ('/getToken');
@@ -77,11 +111,11 @@ const init = async () => {
     );
 
     ReactDOM.render(
-        <RitzList ritzs={[]} />,
+        <MyRitzList ritzs={[]} />,
         document.getElementById('ritzs')
     );
 
-    loadRitzsFromServer();
+    loadAllRitzsFromServer();
 }
 
 window.onload = init;

@@ -4,6 +4,7 @@ const RitzModel = require('../models/Ritz');
 const { Ritz } = models;
 
 const makerPage = (req, res) => res.render('app');
+const settingsPage = (req, res) => res.render('settings');
 
 const makeRitz = async (req, res) => {
   if (!req.body.text) {
@@ -13,6 +14,7 @@ const makeRitz = async (req, res) => {
   const ritzData = {
     text: req.body.text,
     owner: req.session.account._id,
+    username: req.session.account.username,
   };
 
   try {
@@ -37,8 +39,19 @@ const getRitzs = (req, res) => RitzModel.findByOwner(req.session.account._id, (e
   return res.json({ ritzs: docs });
 });
 
+const getAllRitzs = (req, res) => RitzModel.findAll((err, docs) => {
+  if (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred!' });
+  }
+
+  return res.json({ ritzs: docs });
+});
+
 module.exports = {
   makerPage,
+  settingsPage,
   makeRitz,
   getRitzs,
+  getAllRitzs,
 };

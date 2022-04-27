@@ -33,6 +33,12 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  accountStatus: {
+    type: Number,
+    min: 0,
+    max: 1,
+    require: true,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
@@ -70,6 +76,42 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
   } catch (err) {
     return callback(err);
   }
+};
+
+AccountSchema.statics.changePass = async (username, password, newPass, callback) => {
+  try {
+    const doc = await AccountModel.findOne({ username }).exec();
+    if (!doc) {
+      return callback();
+    }
+
+    const match = await bcrypt.compare(password, doc.password);
+    if (match) {
+      await AccountModel.updateOne({ username }, { password: newPass });
+      return callback(null, false);
+    }
+
+    return callback(null, true);
+  } catch (err) {
+    return callback(err);
+  }
+};
+
+AccountSchema.statics.changeStatus = async (username) => {
+  try {
+    return AccountModel.updateOne({ username }, { accountStatus: 1 });
+  } catch (err) {
+    return null;
+  }
+};
+
+AccountSchema.statics.findStatus = (ownerId, callback) => {
+  const search = {
+    // Convert the string ownerId to an object id
+    _id: mongoose.Types.ObjectId(ownerId),
+  };
+
+  return AccountModel.find(search).select('accountStatus').exec(callback);
 };
 
 AccountModel = mongoose.model('Account', AccountSchema);

@@ -17,6 +17,10 @@ const RitzSchema = new mongoose.Schema({
     required: true,
     ref: 'Account',
   },
+  username: {
+    type: String,
+    required: true,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
@@ -33,8 +37,12 @@ RitzSchema.statics.findByOwner = (ownerId, callback) => {
     owner: mongoose.Types.ObjectId(ownerId),
   };
 
-  return RitzModel.find(search).select('text').lean().exec(callback);
+  return RitzModel.find(search).select('username text createdDate').lean().sort({ createdDate: -1 })
+    .exec(callback);
 };
+
+RitzSchema.statics.findAll = (callback) => RitzModel.find({}).select('username text createdDate').lean().sort({ createdDate: -1 })
+  .exec(callback);
 
 RitzModel = mongoose.model('Ritz', RitzSchema);
 
