@@ -23,6 +23,8 @@ const router = (app) => {
   app.post('/changeStatus', mid.requiresLogin, controllers.Account.changeStatus);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+
+  app.get('*', mid.redirect);
 };
 
 module.exports = router;

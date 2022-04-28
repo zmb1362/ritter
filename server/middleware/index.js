@@ -23,8 +23,11 @@ const bypassSecure = (req, res, next) => {
   next();
 };
 
+const redirect = (req, res) => res.redirect('/');
+
 module.exports.requiresLogin = requiresLogin;
 module.exports.requiresLogout = requiresLogout;
+module.exports.redirect = redirect;
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.requiresSecure = requiresSecure;
