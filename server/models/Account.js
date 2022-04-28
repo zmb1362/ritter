@@ -17,10 +17,7 @@ const saltRounds = 10;
 
 let AccountModel = {};
 
-/* Our schema defines the data we will store. A username (string of alphanumeric
-   characters), a password (actually the hashed version of the password created
-   by bcrypt), and the created date.
-*/
+// Schema for data types used for a user's account
 const AccountSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -78,6 +75,7 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
   }
 };
 
+// Helper function to handle changing a user's password
 AccountSchema.statics.changePass = async (username, password, newPass, callback) => {
   try {
     const doc = await AccountModel.findOne({ username }).exec();
@@ -97,6 +95,7 @@ AccountSchema.statics.changePass = async (username, password, newPass, callback)
   }
 };
 
+// Helper function to handle changing a user's account status
 AccountSchema.statics.changeStatus = async (username) => {
   try {
     return AccountModel.updateOne({ username }, { accountStatus: 1 });
@@ -105,6 +104,7 @@ AccountSchema.statics.changeStatus = async (username) => {
   }
 };
 
+// Helper function to return a user's account status when called
 AccountSchema.statics.findStatus = (ownerId, callback) => {
   const search = {
     // Convert the string ownerId to an object id

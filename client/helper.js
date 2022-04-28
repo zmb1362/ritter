@@ -36,6 +36,7 @@ const sendPost = async (url, data, handler) => {
     
 };
 
+// Hide's error message
 const hideError = () => {
     document.getElementById('ritzMessage').classList.add('hidden');
 };

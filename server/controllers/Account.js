@@ -3,15 +3,18 @@ const AccountModel = require('../models/Account');
 
 const { Account } = models;
 
+// Renders the login page
 const loginPage = (req, res) => {
   res.render('login', { csrfToken: req.csrfToken() });
 };
 
+// Logs a user out
 const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/');
 };
 
+// Function to log a user into the app
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -31,6 +34,7 @@ const login = (req, res) => {
   });
 };
 
+// Function to sign a user up and create their account in the database
 const signup = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -59,6 +63,7 @@ const signup = async (req, res) => {
   }
 };
 
+// Function to change a user's password
 const changePass = async (req, res) => {
   const username = `${req.session.account.username}`;
   const pass = `${req.body.pass}`;
@@ -79,6 +84,7 @@ const changePass = async (req, res) => {
   });
 };
 
+// Function to change a user's account status
 const changeStatus = async (req, res) => {
   const username = `${req.session.account.username}`;
 
@@ -91,8 +97,10 @@ const changeStatus = async (req, res) => {
   }
 };
 
+// Gets the csrf token for the session
 const getToken = (req, res) => res.json({ csrfToken: req.csrfToken() });
 
+// Gets the user's account status
 const getStatus = (req, res) => AccountModel.findStatus(req.session.account._id, (err, docs) => {
   if (err) {
     console.log(err);

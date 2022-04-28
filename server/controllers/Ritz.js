@@ -3,14 +3,17 @@ const RitzModel = require('../models/Ritz');
 
 const { Ritz } = models;
 
+// Renders pages
 const makerPage = (req, res) => res.render('app');
 const settingsPage = (req, res) => res.render('settings');
 
+// Creates a Ritz/tweet
 const makeRitz = async (req, res) => {
   if (!req.body.text) {
     return res.status(400).json({ error: 'Type out text!' });
   }
 
+  // Gets data to store into the Ritz
   const ritzData = {
     text: req.body.text,
     owner: req.session.account._id,
@@ -30,6 +33,7 @@ const makeRitz = async (req, res) => {
   }
 };
 
+// Gets the user's Ritzs that they have made
 const getRitzs = (req, res) => RitzModel.findByOwner(req.session.account._id, (err, docs) => {
   if (err) {
     console.log(err);
@@ -39,6 +43,7 @@ const getRitzs = (req, res) => RitzModel.findByOwner(req.session.account._id, (e
   return res.json({ ritzs: docs });
 });
 
+// Gets all of the Ritzs from across all accounts
 const getAllRitzs = (req, res) => RitzModel.findAll((err, docs) => {
   if (err) {
     console.log(err);

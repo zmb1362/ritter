@@ -1,5 +1,6 @@
 const helper = require('./helper.js');
 
+// Handles loading in Ritzs and refreshing page
 const handleRitz = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -17,6 +18,7 @@ const handleRitz = (e) => {
     return false;
 }
 
+// Component used for creating a Ritz
 const RitzForm = (props) => {
     return (
         <form id="ritzForm"
@@ -34,6 +36,7 @@ const RitzForm = (props) => {
     );
 }
 
+// List for Ritzs made, can be all of them or just a user's
 const RitzList = (props) => {
     if(props.ritzs.length === 0) {
         return (
@@ -58,6 +61,7 @@ const RitzList = (props) => {
     );
 };
 
+// Component for Ads on the side of the screen
 const RitzAds = (props) => {
     return (
         <div>
@@ -73,6 +77,7 @@ const RitzAds = (props) => {
     );
 }
 
+// Gets a user's Ritzs from the database
 const loadRitzsFromServer = async () => {
     const response = await fetch ('/getRitzs');
     const data = await response.json();
@@ -82,6 +87,7 @@ const loadRitzsFromServer = async () => {
     );
 }
 
+// Get's all of the Ritzs made from the database
 const loadAllRitzsFromServer = async () => {
     const response = await fetch ('/getAll');
     const data = await response.json();
@@ -91,17 +97,20 @@ const loadAllRitzsFromServer = async () => {
     );
 }
 
-
+// Init
 const init = async () => {
     const response = await fetch ('/getToken');
     const data = await response.json();
 
+    // Get's the user's current account status
     const statusResponse = await fetch('/getStatus');
     const status = await statusResponse.json();
 
+    // Both buttons in the nav bar
     const allRitzButton = document.getElementById('allRitzButton');
     const myRitzButton = document.getElementById('myRitzButton');
 
+    // Loads in a user's Ritzs
     allRitzButton.addEventListener('click', (e) => {
         e.preventDefault();
         loadAllRitzsFromServer();
@@ -110,6 +119,7 @@ const init = async () => {
         return false;
     });
 
+    // Loads in all of the Ritzs
     myRitzButton.addEventListener('click', (e) => {
         e.preventDefault();
         loadRitzsFromServer();
@@ -128,6 +138,7 @@ const init = async () => {
         document.getElementById('ritzs')
     );
 
+    // Check's the user's status to load in ads or not
     if (status.account[0].accountStatus === 0)
     {
         ReactDOM.render(

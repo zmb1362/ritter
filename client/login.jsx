@@ -1,5 +1,6 @@
 const helper = require('./helper.js');
 
+// Handles logging a user into Ritter
 const handleLogin = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -18,6 +19,7 @@ const handleLogin = (e) => {
     return false;
 }
 
+// Handles creating a user's account
 const handleSignup = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -42,6 +44,8 @@ const handleSignup = (e) => {
     return false;
 }
 
+
+// React component for the login window
 const LoginWindow = (props) => {
     return (
         <form id="loginForm"
@@ -61,6 +65,7 @@ const LoginWindow = (props) => {
     );
 }
 
+// React component for the signup window
 const SignupWindow = (props) => {
     return (
         <form id="signupForm"
@@ -82,6 +87,7 @@ const SignupWindow = (props) => {
     );
 }
 
+// Init
 const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();

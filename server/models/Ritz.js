@@ -5,6 +5,7 @@ let RitzModel = {};
 
 const setName = (name) => _.escape(name).trim();
 
+// Schema for data types inside a Ritz
 const RitzSchema = new mongoose.Schema({
   text: {
     type: String,
@@ -27,10 +28,12 @@ const RitzSchema = new mongoose.Schema({
   },
 });
 
+// Returns doc for Ritzs, just contains the text
 RitzSchema.statics.toAPI = (doc) => ({
   text: doc.text,
 });
 
+// Helper function to send out a user's own Ritzs that have been made, ordered from newest to oldest
 RitzSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     // Convert the string ownerId to an object id
@@ -41,6 +44,7 @@ RitzSchema.statics.findByOwner = (ownerId, callback) => {
     .exec(callback);
 };
 
+// Helper function to send out all Ritzs that have been made, ordered from newest to oldest
 RitzSchema.statics.findAll = (callback) => RitzModel.find({}).select('username text createdDate').lean().sort({ createdDate: -1 })
   .exec(callback);
 

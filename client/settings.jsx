@@ -1,5 +1,6 @@
 const helper = require('./helper.js');
 
+// Changes user password
 const handleChangePass = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -19,6 +20,7 @@ const handleChangePass = (e) => {
     return false;
 }
 
+// Changes a user's status for premium
 const handleChangeStatus = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -30,6 +32,7 @@ const handleChangeStatus = (e) => {
     return false;
 }
 
+// Component for changing passwords
 const ChangeWindow = (props) => {
     return (
         <form id="changeForm"
@@ -51,6 +54,7 @@ const ChangeWindow = (props) => {
     );
 }
 
+// Button/form component to change a user's account status
 const StatusButton = (props) => {
     if (props.status === 0)
     {
@@ -79,6 +83,7 @@ const StatusButton = (props) => {
     }
 }
 
+// Init
 const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();
